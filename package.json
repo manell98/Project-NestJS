@@ -1,11 +1,12 @@
 {
   "name": "projeto-teste",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "1.0.0",
+  "description": "Projeto para testar os conhecimentos",
+  "author": "Emanuell Santos de Jesus",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "docker": "docker-compose up --remove-orphans --build --force-recreate",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

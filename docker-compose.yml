@@ -5,7 +5,7 @@ services:
   ###############################################################################
   mongodb:
     image: mongo
-    container_name: nest-js-mongo
+    container_name: mongo-nest-js
     environment:
       BD_TYPE: mongodb
       BD_PORT: 27017
