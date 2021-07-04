@@ -1,0 +1,39 @@
+version: '3'
+services:
+  ###############################################################################
+  # Mongo - Database
+  ###############################################################################
+  mongodb:
+    image: mongo
+    container_name: mongo-nest-js
+    environment:
+      BD_TYPE: mongodb
+      BD_PORT: 27017
+      BD_DATABASE: nest-js-db
+    ports:
+      - "27017:27017"
+    networks:
+      - project-nest-js-network
+
+  ###############################################################################
+  # PROJECT - NODE
+  ###############################################################################
+  project-node:
+    image: project-nest-js
+    container_name: nest-js
+    command: "npm start"
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    depends_on:
+      - mongodb
+    ports:
+      - "3000:3000"
+    environment:
+      LOG_LEVEL: "debug"
+    networks:
+      - project-nest-js-network
+
+networks:
+  project-nest-js-network:
+    driver: bridge
