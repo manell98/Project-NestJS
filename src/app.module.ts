@@ -1,10 +1,16 @@
 import { Module } from '@nestjs/common';
-import { TesteController } from './controllers/teste.controller';
-import { TesteService } from './services/teste.service';
+import { ProdutoController } from './controllers/produto.controller';
+import { ProdutoService } from './services/produto.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { environment } from './config/environment';
+import { ProdutoSchema } from './models/produto';
 
 @Module({
-  imports: [],
-  controllers: [TesteController],
-  providers: [TesteService],
+  imports: [
+    MongooseModule.forFeature([{ name: 'Produto', schema: ProdutoSchema }]),
+    MongooseModule.forRoot(environment.db.url),
+  ],
+  controllers: [ProdutoController],
+  providers: [ProdutoService],
 })
 export class AppModule {}
