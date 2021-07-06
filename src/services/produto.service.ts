@@ -10,6 +10,12 @@ export class ProdutoService {
     @InjectModel('Produto') private readonly produtoModel: Model<IProduto>,
   ) {}
 
+  async findAll(): Promise<Array<IProduto>> {
+    logger.info('Buscando todos os produtos...');
+
+    return this.produtoModel.find();
+  }
+
   async findById(id: string): Promise<IProduto> {
     logger.info(`Buscando produto de id: ${id}...`);
 
@@ -19,11 +25,7 @@ export class ProdutoService {
   async save(produto: IProduto): Promise<IProduto> {
     logger.debug('Salvando produto...');
 
-    const result = new this.produtoModel({
-      codigo: produto.codigo,
-      nome: produto.nome,
-      preco: produto.preco,
-    });
+    const result = new this.produtoModel(produto);
 
     return new this.produtoModel(result).save();
   }

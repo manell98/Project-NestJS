@@ -6,6 +6,11 @@ import { IProduto } from '../models/produto';
 export class ProdutoController {
   constructor(private readonly produtoService: ProdutoService) {}
 
+  @Get()
+  findAll(): Promise<Array<IProduto>> {
+    return this.produtoService.findAll();
+  }
+
   @Get(':id')
   findById(@Param() params): Promise<IProduto> {
     return this.produtoService.findById(params.id);
