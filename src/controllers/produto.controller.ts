@@ -12,8 +12,8 @@ export class ProdutoController {
   }
 
   @Get(':id')
-  findById(@Param() params): Promise<Produto> {
-    return this.produtoService.findById(params.id);
+  findById(@Param('id') id: string): Promise<Produto> {
+    return this.produtoService.findById(id);
   }
 
   @Post()
