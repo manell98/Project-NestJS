@@ -1,23 +1,23 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ProdutoService } from '../services/produto.service';
-import { logger } from '../utils/logger';
-import { IProduto } from '../models/produto';
+import { Produto } from '../models/produto';
 
 @Controller('produto')
 export class ProdutoController {
   constructor(private readonly produtoService: ProdutoService) {}
 
-  @Get('/retornaAlgo')
-  retornaAlgo(): string {
-    logger.info('Controller');
+  @Get()
+  findAll(): Promise<Array<Produto>> {
+    return this.produtoService.findAll();
+  }
 
-    return this.produtoService.retornaAlgo();
+  @Get(':id')
+  findById(@Param('id') id: string): Promise<Produto> {
+    return this.produtoService.findById(id);
   }
 
   @Post()
-  cadastraProduto(@Body() produto: IProduto): Promise<IProduto> {
-    logger.debug('passou aqui...');
-
+  save(@Body() produto: Produto): Promise<Produto> {
     return this.produtoService.save(produto);
   }
 }

@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
+import { Document } from 'mongoose';
 
-export interface IProduto {
+export class Produto extends Document {
   codigo: string;
   nome: string;
   preco: number;
